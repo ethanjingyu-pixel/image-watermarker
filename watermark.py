@@ -4,12 +4,16 @@ from PIL import Image, ImageDraw, ImageFont
 import exifread
 
 def get_exif_date(image_path):
+    date = None
     with open(image_path, 'rb') as f:
         tags = exifread.process_file(f)
         if 'EXIF DateTimeOriginal' in tags:
             date_str = str(tags['EXIF DateTimeOriginal'])
-            return date_str.split(' ')[0].replace(':', '-')
-    return None
+            date = date_str.split(' ')[0].replace(':', '-')
+    if not date:
+        import datetime
+        date = datetime.date.today().strftime("%Y-%m-%d")
+    return date
 
 def add_watermark(image_path, text, output_path, font_size, color, position):
     image = Image.open(image_path)
@@ -31,7 +35,8 @@ def add_watermark(image_path, text, output_path, font_size, color, position):
 
     draw.text((x, y), text, fill=color, font=font)
     
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    if os.path.dirname(output_path):
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
     image.save(output_path)
 
 def main():
@@ -54,9 +59,10 @@ def main():
                     print(f"Added watermark to {filename}")
     else:
         date = get_exif_date(args.image_path)
+        print(f"Extracted date: {date}")
         if date:
-            output_dir = os.path.join(os.path.dirname(args.image_path), os.path.basename(os.path.dirname(args.image_path)) + "_watermark")
-            output_path = os.path.join(output_dir, os.path.basename(args.image_path))
+            filename, file_extension = os.path.splitext(args.image_path)
+            output_path = f"{filename}_watermark{file_extension}"
             add_watermark(args.image_path, date, output_path, args.font_size, args.color, args.position)
             print(f"Added watermark to {args.image_path}")
 
