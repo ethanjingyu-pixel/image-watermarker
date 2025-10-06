@@ -38,6 +38,10 @@ jobs:
         run: |
           pyinstaller --noconfirm --clean --windowed --name ImageWatermarker watermark_gui_simple.py
 
+      - name: Build CLI with PyInstaller (onefile)
+        run: |
+          pyinstaller --noconfirm --clean --onefile --name ImageWatermarkerCLI watermark_cli_v2.py
+
       - name: Archive build artifacts
         uses: actions/upload-artifact@v4
         with:
