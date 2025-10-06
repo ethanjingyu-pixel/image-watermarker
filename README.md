@@ -31,7 +31,7 @@
 推荐从 GitHub 最新 Release 下载可执行文件，助教以最新 Release 为准：
 
 - 最新版下载地址（macOS/Windows）：
-  - https://github.com/ethanjin/image-watermarker/releases/latest
+  - https://github.com/ethanjingyu-pixel/image-watermarker/releases/latest
 
 下载后，按照操作系统运行：
 
