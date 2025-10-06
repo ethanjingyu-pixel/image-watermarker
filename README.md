@@ -1,74 +1,110 @@
-# Image Watermarker
+# Image Watermarker v2.0
 
-This script adds a watermark to an image with the date it was taken. It can process a single image file or a directory of images.
+这是一个功能强大的图片水印工具，支持命令行和图形用户界面（GUI）两种模式。它允许用户为单张图片或整个文件夹中的图片添加自定义文本水印。
 
-## Features
+## 主要功能
 
-- Extracts the date from the image's EXIF data.
-- If no EXIF date is found, it uses the current date.
-- Adds the date as a watermark to the image.
-- Supports customizing the font size, color, and position of the watermark.
-- Can process a single image or a directory of images.
+- **多种水印模式**：支持文本水印和图片水印（即将推出）。
+- **灵活的文本选项**：
+  - **自动日期**：自动从图片的EXIF信息中提取拍摄日期作为水印。
+  - **自定义文本**：支持任意文本内容。
+- **丰富的样式控制**：
+  - **字体**：自定义字体、大小、颜色。
+  - **效果**：支持透明度、旋转、阴影、描边等效果。
+- **精确定位**：
+  - **九宫格定位**：提供九个预设位置（如左上、右下）。
+  - **精确偏移**：支持自定义水平和垂直偏移。
+- **批量处理**：一次性为文件夹中的所有图片添加水印。
+- **模板系统**：
+  - **保存和加载**：将常用设置保存为模板，方便日后调用。
+  - **模板管理**：轻松管理已保存的模板。
+- **多种输出选项**：
+  - **格式**：支持导出为JPEG或PNG格式。
+  - **命名**：可选择保留原文件名、添加前缀或后缀。
+  - **质量和尺寸**：可自定义JPEG质量和调整图片尺寸。
+- **跨平台支持**：提供适用于Windows和macOS的可执行文件。
 
-## Installation
+## 安装和运行
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/ethanjingyu-pixel/image-watermarker.git
-    ```
-2.  Navigate to the project directory:
-    ```bash
-    cd image-watermarker
-    ```
-3.  Create a virtual environment:
-    ```bash
-    python3 -m venv venv
-    ```
-4.  Activate the virtual environment:
-    ```bash
-    source venv/bin/activate
-    ```
-5.  Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 使用可执行文件
 
-## Usage
+最简单的方式是直接下载适用于您操作系统的可执行文件。文件位于 `dist` 目录下。
 
-### Single Image
+- **macOS**： `./dist/ImageWatermarker`
+- **Windows**： `dist\ImageWatermarker.exe`
 
+### 从源码运行
+
+如果您希望从源码运行，请确保已安装Python 3.x，然后按照以下步骤操作：
+
+1. **克隆仓库**：
+   ```bash
+   git clone https://github.com/your-username/image-watermarker.git
+   cd image-watermarker
+   ```
+
+2. **安装依赖**：
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **运行**：
+   - **命令行版本**：
+     ```bash
+     python watermark_cli_v2.py [参数]
+     ```
+   - **GUI版本**（如果您的环境支持）：
+     ```bash
+     python watermark_gui_simple.py
+     ```
+
+## 使用方法（命令行）
+
+命令行版本提供了丰富的功能，以下是一些常用示例：
+
+### 基本用法
+
+为单张图片添加自动日期水印：
 ```bash
-python3 watermark.py <image_path> [options]
+./dist/ImageWatermarker test_image.jpg --auto-date
 ```
 
-### Directory of Images
-
+为整个文件夹的图片添加自定义文本水印：
 ```bash
-python3 watermark.py <directory_path> [options]
+./dist/ImageWatermarker /path/to/your/images --text "My Watermark"
 ```
 
-### Options
+### 高级用法
 
-- `--font_size`: The font size of the watermark (default: 36).
-- `--color`: The color of the watermark (default: white).
-- `--position`: The position of the watermark (e.g., `top_left`, `center`, `bottom_right`) (default: `bottom_right`).
-
-## Examples
-
-### Add a watermark to a single image
-
+添加带有样式的水印：
 ```bash
-python3 watermark.py images.jpeg
+./dist/ImageWatermarker test_image.jpg --text "Styled Watermark" --color "#FF0000" --font-size 48 --opacity 75 --position top_left --shadow --outline
 ```
 
-### Add a watermark with custom options
-
+使用模板并批量处理：
 ```bash
-python3 watermark.py images.jpeg --font_size 50 --color red --position center
+# 保存当前设置为模板
+./dist/ImageWatermarker test_image.jpg --text "Template" --save-template my_template
+
+# 加载模板并处理文件夹
+./dist/ImageWatermarker /path/to/images --load-template ~/.watermark_templates/my_template.json
 ```
 
-### Add watermarks to a directory of images
-
+查看所有可用参数：
 ```bash
-python3 watermark.py /path/to/your/images
+./dist/ImageWatermarker --help
 ```
+
+## GUI版本
+
+GUI版本提供了更直观的操作界面，支持拖放导入、实时预览和所有命令行版本的功能。双击 `watermark_gui_simple.py` 或运行打包好的GUI应用即可启动。
+
+## 未来计划
+
+- **图片水印**：支持使用自定义图片作为水印。
+- **更丰富的UI交互**：如在预览图上直接拖动和旋转水印。
+- **多语言支持**：提供多语言界面。
+
+## 贡献
+
+欢迎提交问题、建议或代码贡献！

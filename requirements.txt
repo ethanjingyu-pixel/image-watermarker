@@ -1,2 +1,4 @@
-Pillow
-exifread
+Pillow>=9.0.0
+exifread>=3.0.0
+tkinterdnd2>=0.3.0
+pyinstaller>=5.0.0
