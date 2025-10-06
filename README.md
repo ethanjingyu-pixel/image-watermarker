@@ -28,10 +28,23 @@
 
 ### 使用可执行文件
 
-最简单的方式是直接下载适用于您操作系统的可执行文件。文件位于 `dist` 目录下。
+推荐从 GitHub 最新 Release 下载可执行文件，助教以最新 Release 为准：
 
-- **macOS**： `./dist/ImageWatermarker`
-- **Windows**： `dist\ImageWatermarker.exe`
+- 最新版下载地址（macOS/Windows）：
+  - https://github.com/ethanjin/image-watermarker/releases/latest
+
+下载后，按照操作系统运行：
+
+- **macOS**：
+  - GUI 版本：双击 `ImageWatermarkerGUI.app` 或将应用拖入应用程序文件夹。
+  - CLI 版本：在终端执行 `./ImageWatermarker`。
+  - 如遇“已损坏或无法打开”，请在“系统设置 -> 隐私与安全性”允许该应用运行，或运行：
+    - `xattr -dr com.apple.quarantine ImageWatermarkerGUI.app`
+
+- **Windows**：
+  - GUI 版本：双击 `ImageWatermarkerGUI.exe`（如提供）。
+  - CLI 版本：双击或在命令行执行 `ImageWatermarker.exe`。
+  - 若出现安全提示，请选择“仍要运行”。
 
 ### 从源码运行
 
